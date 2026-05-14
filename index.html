@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuấn Anh · Chủ Tịch VATC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;500&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green:#00ff88;--green2:#00cc66;--green3:#007a3d;--green4:#003d1e;
+  --cyan:#00e5ff;--cyan2:#0097a7;
+  --amber:#ffaa00;--red:#ff3333;--dim:#0a110a;
+  --bg:#060c06;--panel:#0c160c;--border:#0f2a0f;
+  --font-mono:'Share Tech Mono',monospace;
+  --font-head:'Orbitron',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--green);font-family:var(--font-mono);overflow-x:hidden}
+
+/* Scanline overlay */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,136,.012) 3px,rgba(0,255,136,.012) 4px);pointer-events:none;z-index:9999}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(6,12,6,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:var(--font-head);font-size:14px;font-weight:800;letter-spacing:.2em;color:var(--green);text-decoration:none}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--green3);font-size:11px;letter-spacing:.15em;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--green3)}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:.5;box-shadow:none}}
+
+/* ─── HERO ─── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 2rem 2rem;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;max-width:1200px;width:100%}
+
+/* Animated background grid */
+#hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;animation:gridMove 20s linear infinite;opacity:.4}
+@keyframes gridMove{from{background-position:0 0}to{background-position:0 48px}}
+
+.hero-text{position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.2em;color:var(--cyan);border:1px solid rgba(0,229,255,.2);padding:4px 14px;border-radius:2px;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 1.5s infinite}
+h1.hero-title{font-family:var(--font-head);font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:.04em;color:#fff;margin-bottom:.5rem}
+h1.hero-title em{font-style:normal;color:var(--green)}
+.hero-sub{font-size:12px;letter-spacing:.12em;color:var(--green3);margin-bottom:2rem;line-height:2}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{padding:12px 28px;background:transparent;border:1px solid var(--green);color:var(--green);font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;cursor:pointer;text-decoration:none;transition:all .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn-primary:hover{background:rgba(0,255,136,.08);box-shadow:0 0 20px rgba(0,255,136,.15)}
+.btn-secondary{padding:12px 28px;background:transparent;border:1px solid var(--green3);color:var(--green3);font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Stat strip */
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-item{display:flex;flex-direction:column;gap:4px}
+.stat-num{font-family:var(--font-head);font-size:22px;font-weight:600;color:var(--green)}
+.stat-label{font-size:10px;letter-spacing:.15em;color:var(--green3)}
+
+/* ─── RADAR ─── */
+.radar-wrap{position:relative;z-index:2}
+.radar-outer{width:380px;height:380px;border-radius:50%;border:1px solid var(--green3);position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#0a1f0a 0%,var(--bg) 70%);flex-shrink:0}
+.radar-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,255,136,.12)}
+.radar-ring:nth-child(1){inset:25%}
+.radar-ring:nth-child(2){inset:12.5%}
+.radar-crosshair{position:absolute;inset:0}
+.radar-crosshair::before,.radar-crosshair::after{content:'';position:absolute;background:rgba(0,255,136,.08)}
+.radar-crosshair::before{top:50%;left:0;right:0;height:1px}
+.radar-crosshair::after{left:50%;top:0;bottom:0;width:1px}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;animation:sweep 4s linear infinite;transform-origin:50% 50%}
+.radar-sweep::after{content:'';position:absolute;top:50%;left:50%;width:50%;height:1px;background:linear-gradient(to right,transparent,var(--green));transform-origin:left center}
+@keyframes sweep{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* Blips */
+.blip{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--green);transform:translate(-50%,-50%);animation:blip 4s linear infinite}
+.blip::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--green);opacity:.4;animation:blipRing 2s ease-out infinite}
+@keyframes blipRing{0%{transform:scale(1);opacity:.4}100%{transform:scale(3);opacity:0}}
+@keyframes blip{0%,100%{opacity:0}50%{opacity:1}}
+
+/* radar labels */
+.radar-label{position:absolute;font-size:9px;color:var(--green3);letter-spacing:.08em;white-space:nowrap}
+.radar-label.tl{top:8px;left:12px}
+.radar-label.tr{top:8px;right:12px}
+.radar-label.bl{bottom:8px;left:12px}
+.radar-label.br{bottom:8px;right:12px}
+
+/* ─── FIDS ─── */
+#fids{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-title{font-family:var(--font-head);font-size:14px;letter-spacing:.2em;color:#fff}
+.section-title span{color:var(--green)}
+.section-tag{font-size:10px;letter-spacing:.15em;color:var(--green3)}
+
+.fids-table{width:100%;border-collapse:collapse}
+.fids-table thead tr{border-bottom:1px solid var(--border)}
+.fids-table th{font-size:9px;letter-spacing:.18em;color:var(--green3);padding:8px 12px;text-align:left;font-weight:400}
+.fids-table td{padding:10px 12px;font-size:12px;letter-spacing:.06em;border-bottom:1px solid rgba(15,42,15,.5);transition:background .15s}
+.fids-table tbody tr:hover td{background:rgba(0,255,136,.03)}
+.fids-table .flight-no{color:#fff;font-family:var(--font-head);font-size:12px;font-weight:600}
+.fids-table .route{color:var(--green);font-size:11px}
+.fids-table .time{color:var(--cyan);font-size:12px}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:10px;letter-spacing:.1em}
+.badge.on-time{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}
+.badge.boarding{background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2);animation:blink2 1.2s infinite}
+.badge.departed{background:rgba(255,170,0,.08);color:var(--amber);border:1px solid rgba(255,170,0,.2)}
+.badge.delayed{background:rgba(255,51,51,.08);color:var(--red);border:1px solid rgba(255,51,51,.2)}
+.badge.approach{background:rgba(0,255,136,.15);color:#00ffaa;border:1px solid rgba(0,255,136,.3)}
+@keyframes blink2{0%,100%{opacity:1}50%{opacity:.5}}
+.aircraft-type{color:var(--green3);font-size:11px}
+.altitude{color:#88ffbb;font-size:11px}
+
+/* ─── ATC COMM PANEL ─── */
+#comms{padding:5rem 2rem;background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.comms-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.comm-feed{display:flex;flex-direction:column;gap:0}
+.feed-header{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
+.feed-title{font-family:var(--font-head);font-size:12px;letter-spacing:.18em;color:#fff}
+.feed-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+.comm-line{padding:10px 0;border-bottom:1px solid rgba(15,42,15,.6);display:grid;grid-template-columns:80px 60px 1fr;gap:12px;font-size:11px;line-height:1.6}
+.comm-time{color:var(--green3)}
+.comm-call{color:var(--cyan);font-weight:600}
+.comm-msg{color:rgba(0,255,136,.75)}
+.comm-msg.atc{color:#fff}
+
+/* Freq panel */
+.freq-panel{}
+.freq-display{background:var(--bg);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.5rem;position:relative}
+.freq-main{font-family:var(--font-head);font-size:2.5rem;font-weight:600;color:var(--green);letter-spacing:.06em}
+.freq-unit{font-size:14px;color:var(--green3);margin-left:4px}
+.freq-label2{font-size:10px;letter-spacing:.18em;color:var(--green3);margin-top:4px}
+.freq-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.freq-slot{background:rgba(0,255,136,.04);border:1px solid var(--border);padding:10px;cursor:pointer;transition:all .15s}
+.freq-slot:hover{border-color:var(--green3);background:rgba(0,255,136,.08)}
+.freq-slot.active{border-color:var(--green);background:rgba(0,255,136,.08)}
+.freq-slot-mhz{font-size:14px;color:var(--green);font-family:var(--font-head)}
+.freq-slot-name{font-size:10px;color:var(--green3);letter-spacing:.1em;margin-top:2px}
+
+/* ─── MAP ─── */
+#map-section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.map-wrap{position:relative;width:100%;height:420px;border:1px solid var(--border);overflow:hidden;background:var(--panel)}
+.map-svg{width:100%;height:100%}
+.map-label{font-size:10px;fill:var(--green3);font-family:var(--font-mono);letter-spacing:.08em}
+.map-airport{fill:var(--green);animation:pulse 2s infinite}
+.map-route{stroke:rgba(0,255,136,.18);stroke-width:1;fill:none;stroke-dasharray:4 6;animation:dashMove 8s linear infinite}
+@keyframes dashMove{from{stroke-dashoffset:0}to{stroke-dashoffset:-100}}
+.map-plane{fill:var(--cyan)}
+.map-overlay{position:absolute;top:1rem;left:1rem;font-size:10px;letter-spacing:.12em}
+.map-overlay-item{color:var(--green3);margin-bottom:4px}
+.map-overlay-item strong{color:var(--green)}
+.fir-label{font-size:11px;fill:rgba(0,255,136,.2);font-family:'Orbitron',sans-serif;letter-spacing:.15em}
+
+/* ─── SYSTEM STATUS ─── */
+#status-section{padding:5rem 2rem;background:var(--panel);border-top:1px solid var(--border)}
+.status-inner{max-width:1200px;margin:0 auto}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.status-card{background:var(--bg);border:1px solid var(--border);padding:1.25rem;position:relative;overflow:hidden}
+.status-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;animation:loadBar 3s ease forwards}
+.status-card:nth-child(2)::before{animation-delay:.3s}
+.status-card:nth-child(3)::before{animation-delay:.6s}
+.status-card:nth-child(4)::before{animation-delay:.9s}
+@keyframes loadBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.sc-label{font-size:10px;letter-spacing:.15em;color:var(--green3);margin-bottom:.75rem}
+.sc-value{font-family:var(--font-head);font-size:1.8rem;font-weight:600;color:#fff}
+.sc-value span{font-size:12px;color:var(--green3);font-family:var(--font-mono)}
+.sc-bar{height:3px;background:rgba(0,255,136,.1);margin-top:12px;border-radius:2px}
+.sc-bar-fill{height:100%;background:var(--green);border-radius:2px;transition:width 1s ease}
+.sc-status{font-size:10px;color:var(--green);letter-spacing:.1em;margin-top:8px}
+
+/* ─── FOOTER ─── */
+footer{padding:3rem 2rem;border-top:1px solid var(--border);max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:var(--font-head);font-size:13px;letter-spacing:.2em;color:var(--green3)}
+.footer-copy{font-size:10px;color:rgba(0,255,136,.25);letter-spacing:.12em}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:10px;color:var(--green3);letter-spacing:.12em;text-decoration:none}
+.footer-links a:hover{color:var(--green)}
+
+/* ticker */
+.ticker-wrap{background:rgba(0,0,0,.4);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:6px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-block;animation:ticker 40s linear infinite;font-size:10px;letter-spacing:.12em;color:var(--green3)}
+.ticker-inner span{margin:0 3rem;color:var(--green)}
+@keyframes ticker{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;inset:0;background:#060c06;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace">
+  <div style="width:100%;max-width:480px;padding:2rem;text-align:center">
+    <div style="width:100px;height:100px;border-radius:50%;border:1px solid #007a3d;margin:0 auto 2rem;position:relative;display:flex;align-items:center;justify-content:center">
+      <div style="width:72px;height:72px;border-radius:50%;border:1px solid #003d1e;position:absolute"></div>
+      <div style="position:absolute;inset:0;border-radius:50%;animation:sweep 3s linear infinite;transform-origin:50% 50%">
+        <div style="position:absolute;top:50%;left:50%;width:50%;height:1px;background:linear-gradient(to right,transparent,#00ff88);transform-origin:left center"></div>
+      </div>
+      <span style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:800;color:#00ff88;letter-spacing:.1em;position:relative;z-index:1">VATC</span>
+    </div>
+    <div style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:.15em;margin-bottom:.4rem">TUẤN ANH</div>
+    <div style="font-size:10px;letter-spacing:.25em;color:#007a3d;margin-bottom:.25rem">CHỦ TỊCH · VIETNAM ATC</div>
+    <div style="font-size:10px;letter-spacing:.2em;color:#003d1e;margin-bottom:2.5rem">RESTRICTED ACCESS SYSTEM</div>
+    <div style="background:#0c160c;border:1px solid #0f2a0f;padding:1.5rem;border-radius:4px;margin-bottom:1rem;text-align:left">
+      <div style="font-size:10px;letter-spacing:.18em;color:#007a3d;margin-bottom:1rem">NHẬP MÃ TRUY CẬP</div>
+      <input id="gateInput" type="password" placeholder="••••••••••"
+        autocomplete="off" spellcheck="false"
+        style="width:100%;background:#060c06;border:1px solid #0f2a0f;border-radius:2px;color:#00ff88;font-family:'Share Tech Mono',monospace;font-size:18px;padding:12px 14px;outline:none;letter-spacing:.3em;text-align:center;box-sizing:border-box"
+        onfocus="this.style.borderColor='#007a3d'"
+        onblur="this.style.borderColor='#0f2a0f'"
+        onkeydown="if(event.key==='Enter')checkGate()"/>
+      <div id="gateErr" style="font-size:10px;letter-spacing:.15em;color:#ff3333;margin-top:.75rem;min-height:16px;text-align:center"></div>
+    </div>
+    <button onclick="checkGate()"
+      style="width:100%;padding:13px;background:transparent;border:1px solid #00aa44;color:#00ff88;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.2em;cursor:pointer;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);transition:all .2s"
+      onmouseover="this.style.background='rgba(0,255,136,.08)'"
+      onmouseout="this.style.background='transparent'">
+      XÁC NHẬN TRUY CẬP
+    </button>
+    <div style="font-size:9px;letter-spacing:.12em;color:#003d1e;margin-top:1.5rem">TRUY CẬP TRÁI PHÉP BỊ GHI LẠI · VATC SECURITY PROTOCOL v2.5</div>
+  </div>
+</div>
+<script>
+// ── ACCESS KEY CONFIG ──────────────────────────────────────────────────
+// Bước 1: Tạo GitHub Gist tại https://gist.github.com
+//         Tạo file tên "key.txt", nội dung là mật khẩu bạn muốn, ví dụ: TUANANH2025
+//         Nhấn "Create secret gist" → Click vào file → Click "Raw" → Copy URL
+// Bước 2: Dán URL raw vào GIST_URL bên dưới
+// Bước 3: Khi muốn đổi mật khẩu → vào Gist → Edit → sửa key.txt → Save
+//         Người dùng reload trang là bị khoá ngay lập tức.
+//
+// FALLBACK_KEY: dùng khi mất mạng / Gist không truy cập được
+// ──────────────────────────────────────────────────────────────────────
+const GIST_URL      = "PASTE_RAW_GIST_URL_HERE"; // ← thay bằng URL raw của bạn
+const FALLBACK_KEY  = "TUANANH_ATCSANBAY";        // ← đổi thành key dự phòng bạn muốn
+// ──────────────────────────────────────────────────────────────────────
+
+let _remoteKey = null;
+let _keyLoaded = false;
+
+// Fetch key từ Gist ngay khi trang load
+(async function fetchRemoteKey(){
+  if(!GIST_URL || GIST_URL === "PASTE_RAW_GIST_URL_HERE") return;
+  try {
+    const res = await fetch(GIST_URL + "?t=" + Date.now(), {cache:"no-store"});
+    if(res.ok){
+      _remoteKey = (await res.text()).trim().toUpperCase();
+      _keyLoaded = true;
+    }
+  } catch(e) { /* fallback sẽ được dùng */ }
+})();
+
+function getActiveKey(){
+  return (_keyLoaded && _remoteKey) ? _remoteKey : FALLBACK_KEY.toUpperCase();
+}
+
+function unlockGate(){
+  const gate = document.getElementById('gate');
+  gate.style.transition = 'opacity .6s';
+  gate.style.opacity = '0';
+  setTimeout(() => gate.remove(), 600);
+}
+
+function showGateError(msg){
+  const err = document.getElementById('gateErr');
+  const inp = document.getElementById('gateInput');
+  err.textContent = msg;
+  inp.style.borderColor = '#ff3333';
+  inp.value = '';
+  setTimeout(() => { err.textContent = ''; inp.style.borderColor = '#0f2a0f'; }, 2500);
+}
+
+async function checkGate(){
+  const val = document.getElementById('gateInput').value.trim().toUpperCase();
+  if(!val) return;
+
+  const btn = document.querySelector('#gate button');
+  btn.textContent = 'ĐANG XÁC THỰC...';
+  btn.style.pointerEvents = 'none';
+
+  // Nếu Gist chưa load xong thì thử fetch lại 1 lần
+  if(!_keyLoaded && GIST_URL && GIST_URL !== "PASTE_RAW_GIST_URL_HERE"){
+    try {
+      const res = await fetch(GIST_URL + "?t=" + Date.now(), {cache:"no-store"});
+      if(res.ok){ _remoteKey = (await res.text()).trim().toUpperCase(); _keyLoaded = true; }
+    } catch(e) {}
+  }
+
+  btn.textContent = 'XÁC NHẬN TRUY CẬP';
+  btn.style.pointerEvents = 'auto';
+
+  if(val === getActiveKey()){
+    unlockGate();
+  } else {
+    const src = (_keyLoaded && _remoteKey) ? 'REMOTE' : 'LOCAL FALLBACK';
+    showGateError('✗ MÃ KHÔNG ĐÚNG (' + src + ') — TRUY CẬP BỊ TỪ CHỐI');
+  }
+}
+</script>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>TUẤN ANH</span> · CHỦ TỊCH</a>
+  <ul class="nav-links">
+    <li><a href="#fids">DEPARTURES</a></li>
+    <li><a href="#comms">COMMUNICATIONS</a></li>
+    <li><a href="#map-section">FIR MAP</a></li>
+    <li><a href="#status-section">SYSTEM</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="nav-dot"></div>
+    OPERATIONS NORMAL
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div style="position:fixed;bottom:0;left:0;right:0;z-index:100">
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>VHN</span> HAN APPROACH 119.700 MHz · ACTIVE
+    &nbsp;&nbsp;&nbsp;
+    <span>VHN</span> SGN DEPARTURE 125.700 MHz · ACTIVE
+    &nbsp;&nbsp;&nbsp;
+    <span>METAR</span> VVNB 141200Z 08006KT 9999 FEW018 SCT060 31/23 Q1011
+    &nbsp;&nbsp;&nbsp;
+    <span>METAR</span> VVTS 141200Z 23008KT 9999 FEW030 32/26 Q1009
+    &nbsp;&nbsp;&nbsp;
+    <span>NOTAM</span> VN D0432/25 — ILS RWY 11L VVNB UNAVAILABLE 0400–0800Z
+    &nbsp;&nbsp;&nbsp;
+    <span>TRAFFIC</span> 47 AIRCRAFT ACTIVE IN HANOI FIR
+    &nbsp;&nbsp;&nbsp;
+    <span>SIGMET</span> TS FCST HCM FIR OBS AT 1400Z — MODERATE TURBULENCE
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge">TUẤN ANH · CHỦ TỊCH VATC</div>
+      <h1 class="hero-title">HANOI<br>CONTROL<br><em>CENTER</em></h1>
+      <p class="hero-sub">
+        VVNB · VVTS · VVDN · VVVH<br>
+        HO CHI MINH FIR · HANOI FIR<br>
+        24/7 AREA CONTROL OPERATIONS
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#fids">VIEW TRAFFIC</a>
+        <a class="btn-secondary" href="#comms">ATC COMMS</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num" id="ctr1">00</div><div class="stat-label">AIRCRAFT ACTIVE</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">FIR REGIONS</div></div>
+        <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">SECTORS OPEN</div></div>
+        <div class="stat-item"><div class="stat-num">98.7<small style="font-size:14px">%</small></div><div class="stat-label">ON-TIME RATE</div></div>
+      </div>
+    </div>
+
+    <!-- RADAR -->
+    <div class="radar-wrap">
+      <div class="radar-outer">
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-crosshair"></div>
+        <div class="radar-sweep"></div>
+        <div class="blip" style="top:38%;left:52%;animation-delay:.8s"></div>
+        <div class="blip" style="top:55%;left:34%;animation-delay:1.6s"></div>
+        <div class="blip" style="top:44%;left:68%;animation-delay:2.4s"></div>
+        <div class="blip" style="top:62%;left:58%;animation-delay:3.2s"></div>
+        <div class="blip" style="top:30%;left:45%;animation-delay:.4s"></div>
+        <div class="blip" style="top:70%;left:42%;animation-delay:2s"></div>
+        <div class="blip" style="top:48%;left:75%;animation-delay:3.6s"></div>
+        <span class="radar-label tl">VVNB 121.5</span>
+        <span class="radar-label tr">ALT 37000</span>
+        <span class="radar-label bl">RNG 200NM</span>
+        <span class="radar-label br">TRK 082°</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIDS TABLE -->
+<section id="fids">
+  <div class="section-head">
+    <h2 class="section-title"><span>▍</span> FLIGHT INFORMATION DISPLAY</h2>
+    <span class="section-tag">UPDATED 14:22:07 UTC+7</span>
+  </div>
+  <table class="fids-table">
+    <thead>
+      <tr>
+        <th>FLIGHT</th><th>ROUTE</th><th>AIRCRAFT</th><th>STD / STA</th><th>ALTITUDE</th><th>SQUAWK</th><th>STATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="flight-no">VN531</td>
+        <td class="route">HAN → SGN</td>
+        <td class="aircraft-type">A321neo</td>
+        <td class="time">14:35</td>
+        <td class="altitude">FL280</td>
+        <td style="color:var(--green3)">2341</td>
+        <td><span class="badge boarding">BOARDING</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">VJ832</td>
+        <td class="route">HAN → DAD</td>
+        <td class="aircraft-type">A320</td>
+        <td class="time">14:50</td>
+        <td class="altitude">FL240</td>
+        <td style="color:var(--green3)">4421</td>
+        <td><span class="badge on-time">ON TIME</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">QH201</td>
+        <td class="route">SGN → HAN</td>
+        <td class="aircraft-type">A321</td>
+        <td class="time">14:18</td>
+        <td class="altitude">FL350</td>
+        <td style="color:var(--green3)">5512</td>
+        <td><span class="badge approach">APPROACH</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">BL345</td>
+        <td class="route">HAN → VII</td>
+        <td class="aircraft-type">ATR72</td>
+        <td class="time">14:10</td>
+        <td class="altitude">FL160</td>
+        <td style="color:var(--green3)">3301</td>
+        <td><span class="badge departed">DEPARTED</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">CX733</td>
+        <td class="route">HKG → HAN</td>
+        <td class="aircraft-type">A330-300</td>
+        <td class="time">15:20</td>
+        <td class="altitude">FL380</td>
+        <td style="color:var(--green3)">7410</td>
+        <td><span class="badge on-time">ON TIME</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">VN54</td>
+        <td class="route">HAN → NRT</td>
+        <td class="aircraft-type">B787-9</td>
+        <td class="time">15:05</td>
+        <td class="altitude">FL390</td>
+        <td style="color:var(--green3)">2200</td>
+        <td><span class="badge on-time">ON TIME</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">TG561</td>
+        <td class="route">BKK → HAN</td>
+        <td class="aircraft-type">A350-900</td>
+        <td class="time">14:45</td>
+        <td class="altitude">FL370</td>
+        <td style="color:var(--green3)">6633</td>
+        <td><span class="badge delayed">DELAYED +20</span></td>
+      </tr>
+      <tr>
+        <td class="flight-no">VN198</td>
+        <td class="route">CDG → SGN</td>
+        <td class="aircraft-type">B787-10</td>
+        <td class="time">05:30+1</td>
+        <td class="altitude">FL400</td>
+        <td style="color:var(--green3)">1234</td>
+        <td><span class="badge on-time">EN ROUTE</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMMS -->
+<section id="comms">
+  <div class="comms-inner">
+    <!-- Live ATC feed -->
+    <div class="comm-feed">
+      <div class="section-head" style="margin-bottom:1.5rem">
+        <h2 class="section-title"><span>▍</span> ATC COMMUNICATIONS LOG</h2>
+        <span class="section-tag">LIVE</span>
+      </div>
+      <div id="commFeed">
+        <div class="comm-line">
+          <span class="comm-time">14:22:03</span><span class="comm-call">VN531</span><span class="comm-msg">Hanoi Approach, Vietnam Airlines 531, passing flight level 080, descending to 3000.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:22:11</span><span class="comm-call">VVNB APP</span><span class="comm-msg atc">Vietnam Airlines 531, Hanoi Approach, radar contact. Descend to 2500, QNH 1011, expect ILS runway 11L.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:22:19</span><span class="comm-call">VN531</span><span class="comm-msg">Descend 2500, QNH 1011, ILS 11L. Vietnam 531.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:21:44</span><span class="comm-call">QH201</span><span class="comm-msg">Ho Chi Minh Control, Bamboo 201, requesting flight level 370.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:21:52</span><span class="comm-call">VVTS CTR</span><span class="comm-msg atc">Bamboo 201, approved climb flight level 370, direct BITOD, winds 230 at 28.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:21:08</span><span class="comm-call">VJ832</span><span class="comm-msg">Hanoi Departure, VietJet 832, airborne runway 11R, climbing through 1200.</span>
+        </div>
+        <div class="comm-line">
+          <span class="comm-time">14:21:16</span><span class="comm-call">VVNB DEP</span><span class="comm-msg atc">VietJet 832, radar contact. Climb and maintain FL240. Proceed direct ABTAN, squawk 4421.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frequency panel -->
+    <div class="freq-panel">
+      <div class="section-head" style="margin-bottom:1.5rem">
+        <h2 class="section-title"><span>▍</span> FREQUENCY CONTROL</h2>
+        <span class="section-tag">VHF / UHF</span>
+      </div>
+      <div class="freq-display">
+        <div class="freq-main">121<span style="color:var(--green3)">.</span>700<span class="freq-unit">MHz</span></div>
+        <div class="freq-label2">HANOI APPROACH · ACTIVE</div>
+      </div>
+      <div class="freq-grid">
+        <div class="freq-slot active" onclick="setFreq(this,'121.700','HAN APPROACH')">
+          <div class="freq-slot-mhz">121.700</div>
+          <div class="freq-slot-name">HAN APPROACH</div>
+        </div>
+        <div class="freq-slot" onclick="setFreq(this,'119.100','HAN DEPARTURE')">
+          <div class="freq-slot-mhz">119.100</div>
+          <div class="freq-slot-name">HAN DEPARTURE</div>
+        </div>
+        <div class="freq-slot" onclick="setFreq(this,'132.200','HANOI CONTROL')">
+          <div class="freq-slot-mhz">132.200</div>
+          <div class="freq-slot-name">HANOI CONTROL</div>
+        </div>
+        <div class="freq-slot" onclick="setFreq(this,'125.700','SGN DEPARTURE')">
+          <div class="freq-slot-mhz">125.700</div>
+          <div class="freq-slot-name">SGN DEPARTURE</div>
+        </div>
+        <div class="freq-slot" onclick="setFreq(this,'121.500','EMERGENCY')">
+          <div class="freq-slot-mhz" style="color:var(--red)">121.500</div>
+          <div class="freq-slot-name">GUARD / EMRG</div>
+        </div>
+        <div class="freq-slot" onclick="setFreq(this,'118.100','HAN GROUND')">
+          <div class="freq-slot-mhz">118.100</div>
+          <div class="freq-slot-name">HAN GROUND</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIR MAP -->
+<section id="map-section">
+  <div class="section-head">
+    <h2 class="section-title"><span>▍</span> VIETNAM FIR OVERVIEW</h2>
+    <span class="section-tag">HANOI FIR · HO CHI MINH FIR</span>
+  </div>
+  <div class="map-wrap">
+    <svg class="map-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="900" height="420" fill="#0c160c"/>
+      <!-- Grid -->
+      <defs>
+        <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0L0 0 0 40" fill="none" stroke="rgba(0,255,136,0.05)" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="900" height="420" fill="url(#g)"/>
+      <!-- Vietnam rough outline -->
+      <path d="M380,30 L400,50 L420,80 L415,120 L430,150 L420,190 L440,220 L445,260 L430,300 L420,350 L410,390 L400,420" stroke="rgba(0,255,136,0.15)" stroke-width="1.5" fill="none"/>
+      <!-- FIR boundary -->
+      <rect x="80" y="20" width="320" height="185" fill="none" stroke="rgba(0,229,255,0.1)" stroke-width="1" stroke-dasharray="6 4"/>
+      <rect x="80" y="210" width="340" height="190" fill="none" stroke="rgba(0,229,255,0.07)" stroke-width="1" stroke-dasharray="6 4"/>
+      <text x="90" y="40" class="fir-label">HANOI FIR</text>
+      <text x="90" y="250" class="fir-label">HO CHI MINH FIR</text>
+      <!-- Route lines -->
+      <path class="map-route" d="M240,80 L420,280"/>
+      <path class="map-route" d="M240,80 L480,160" stroke-dasharray="3 8"/>
+      <path class="map-route" d="M240,80 L600,200" stroke-dasharray="5 10"/>
+      <path class="map-route" d="M420,280 L600,200"/>
+      <path class="map-route" d="M420,280 L500,380"/>
+      <!-- Airports -->
+      <circle cx="240" cy="80" r="6" class="map-airport"/>
+      <text x="252" y="77" class="map-label">VVNB · HAN</text>
+      <text x="252" y="88" class="map-label" fill="rgba(0,255,136,0.4)">Nội Bài</text>
+      <circle cx="420" cy="280" r="6" class="map-airport" style="animation-delay:.6s"/>
+      <text x="432" y="277" class="map-label">VVTS · SGN</text>
+      <text x="432" y="288" class="map-label" fill="rgba(0,255,136,0.4)">Tân Sơn Nhất</text>
+      <circle cx="340" cy="175" r="4" class="map-airport" style="animation-delay:1.2s"/>
+      <text x="350" y="178" class="map-label">VVDN · DAD</text>
+      <circle cx="180" cy="145" r="4" class="map-airport" style="animation-delay:1.8s"/>
+      <text x="190" y="148" class="map-label">VVVH · VII</text>
+      <circle cx="480" cy="340" r="4" class="map-airport" style="animation-delay:2.4s"/>
+      <text x="492" y="343" class="map-label">VVCM · VCA</text>
+      <!-- Aircraft symbols -->
+      <g transform="translate(310,120)">
+        <polygon points="0,-7 4,5 0,2 -4,5" fill="#00e5ff" opacity="0.8"/>
+        <text x="8" y="-2" class="map-label" fill="#00e5ff">VN531</text>
+      </g>
+      <g transform="translate(390,200)">
+        <polygon points="0,-7 4,5 0,2 -4,5" fill="#00e5ff" opacity="0.8" transform="rotate(45)"/>
+        <text x="8" y="-2" class="map-label" fill="#00e5ff">QH201</text>
+      </g>
+      <g transform="translate(450,90)">
+        <polygon points="0,-7 4,5 0,2 -4,5" fill="#00ff88" opacity="0.7" transform="rotate(80)"/>
+        <text x="8" y="-2" class="map-label">VN54</text>
+      </g>
+      <!-- Legend -->
+      <g transform="translate(580,30)">
+        <rect x="0" y="0" width="280" height="140" fill="rgba(12,22,12,0.8)" stroke="rgba(0,255,136,0.15)" stroke-width="0.5"/>
+        <text x="12" y="22" class="map-label" fill="#fff" style="font-size:10px;letter-spacing:.2em">LEGEND</text>
+        <circle cx="20" cy="42" r="4" fill="#00ff88"/>
+        <text x="32" y="46" class="map-label">ACTIVE AIRPORT</text>
+        <polygon points="20,58 23,66 20,64 17,66" fill="#00e5ff"/>
+        <text x="32" y="64" class="map-label">AIRCRAFT</text>
+        <line x1="12" y1="78" x2="32" y2="78" stroke="rgba(0,255,136,0.3)" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="38" y="82" class="map-label">ATS ROUTE</text>
+        <rect x="12" y="95" width="20" height="12" fill="none" stroke="rgba(0,229,255,0.2)" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <text x="38" y="105" class="map-label">FIR BOUNDARY</text>
+        <text x="12" y="128" class="map-label" fill="rgba(0,255,136,0.5)">DATUM: WGS84 · ACC VVNB</text>
+      </g>
+    </svg>
+    <div class="map-overlay">
+      <div class="map-overlay-item">MODE: <strong>SURVEILLANCE</strong></div>
+      <div class="map-overlay-item">RANGE: <strong>600 NM</strong></div>
+      <div class="map-overlay-item">FILTER: <strong>IFR ONLY</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM STATUS -->
+<section id="status-section">
+  <div class="status-inner">
+    <div class="section-head">
+      <h2 class="section-title"><span>▍</span> SYSTEM STATUS</h2>
+      <span class="section-tag">ALL SYSTEMS NOMINAL</span>
+    </div>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="sc-label">AIRCRAFT ACTIVE</div>
+        <div class="sc-value" id="acCount">47 <span>AC</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:82%"></div></div>
+        <div class="sc-status">▲ NORMAL TRAFFIC LOAD</div>
+      </div>
+      <div class="status-card">
+        <div class="sc-label">RADAR COVERAGE</div>
+        <div class="sc-value">99.2 <span>%</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:99%"></div></div>
+        <div class="sc-status">◆ PSR + SSR OPERATIONAL</div>
+      </div>
+      <div class="status-card">
+        <div class="sc-label">COMMS STATUS</div>
+        <div class="sc-value">12 <span>CH</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:100%"></div></div>
+        <div class="sc-status">◆ ALL SECTORS ONLINE</div>
+      </div>
+      <div class="status-card">
+        <div class="sc-label">SEPARATION EVENTS</div>
+        <div class="sc-value" style="color:var(--green)">0 <span>TODAY</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:4%;background:var(--green)"></div></div>
+        <div class="sc-status">◆ NO ALERTS ACTIVE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE PANEL -->
+<section id="voice-section" style="padding:3rem 2rem;background:#060c06;border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head">
+      <h2 class="section-title"><span>▍</span> ATC VOICE BROADCAST</h2>
+      <span class="section-tag" id="voiceStatus">STANDBY</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start">
+      <!-- Left: key + message -->
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:1rem;align-items:center">
+          <div style="background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.2);border-radius:4px;padding:8px 14px;font-size:11px;letter-spacing:.1em;color:var(--green);flex:1">
+            ◆ MIỄN PHÍ — Không cần API key. Dùng giọng có sẵn trong trình duyệt.
+          </div>
+        </div>
+        <textarea id="voiceMsg" rows="3"
+          style="width:100%;background:#0c160c;border:1px solid var(--border);border-radius:4px;color:var(--green);font-family:var(--font-mono);font-size:12px;padding:10px 12px;resize:vertical;outline:none;letter-spacing:.04em;line-height:1.7;margin-bottom:1rem"
+          onfocus="this.style.borderColor='var(--green3)'" onblur="this.style.borderColor='var(--border)'"
+          >Vietnam Airlines 531, Hanoi Approach, radar contact. Descend to 2500, QNH 1011. Expect ILS runway one one left. Vietnam 531.</textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
+          <button onclick="speak()" id="pttBtn"
+            style="flex:1;padding:12px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;cursor:pointer;transition:all .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)">
+            ▶ TRANSMIT (PTT)
+          </button>
+          <button onclick="usePreset(0)"
+            style="padding:12px 16px;background:transparent;border:1px solid var(--border);color:var(--green3);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:2px"
+            onmouseover="this.style.borderColor='var(--green3)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--green3)'">
+            CLEARANCE
+          </button>
+          <button onclick="usePreset(1)"
+            style="padding:12px 16px;background:transparent;border:1px solid var(--border);color:var(--green3);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:2px"
+            onmouseover="this.style.borderColor='var(--green3)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--green3)'">
+            APPROACH
+          </button>
+          <button onclick="usePreset(2)"
+            style="padding:12px 16px;background:transparent;border:1px solid var(--border);color:var(--green3);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:2px"
+            onmouseover="this.style.borderColor='var(--green3)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--green3)'">
+            DEPARTURE
+          </button>
+          <button onclick="usePreset(3)"
+            style="padding:12px 16px;background:transparent;border:1px solid var(--red);color:var(--red);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:2px"
+            onmouseover="this.style.background='rgba(255,51,51,.08)'" onmouseout="this.style.background='transparent'">
+            EMERGENCY
+          </button>
+        </div>
+        <!-- Waveform canvas -->
+        <canvas id="vWave" width="640" height="52"
+          style="width:100%;height:52px;display:block;background:#050d05;border-radius:4px;border:1px solid var(--border)"></canvas>
+      </div>
+
+      <!-- Right: params -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#0c160c;border:1px solid var(--border);padding:1rem;border-radius:4px">
+          <div style="font-size:10px;letter-spacing:.15em;color:var(--green3);margin-bottom:.5rem">VOICE</div>
+          <select id="vVoice" style="width:100%;background:#060c06;border:1px solid var(--border);color:var(--green);font-family:var(--font-mono);font-size:12px;padding:7px 10px;outline:none;border-radius:2px">
+            <option value="">⏳ Đang tải giọng...</option>
+          </select>
+        </div>
+        <div style="background:#0c160c;border:1px solid var(--border);padding:1rem;border-radius:4px">
+          <div style="font-size:10px;letter-spacing:.15em;color:var(--green3);margin-bottom:.75rem">SQUELCH <span id="sqVal" style="color:var(--green)">0.35</span></div>
+          <input type="range" id="sqSlider" min="0" max="1" step="0.05" value="0.35"
+            oninput="document.getElementById('sqVal').textContent=parseFloat(this.value).toFixed(2)"
+            style="width:100%;accent-color:var(--green);height:3px">
+        </div>
+        <div style="background:#0c160c;border:1px solid var(--border);padding:1rem;border-radius:4px">
+          <div style="font-size:10px;letter-spacing:.15em;color:var(--green3);margin-bottom:.75rem">DISTORTION <span id="distValV" style="color:var(--green)">22</span></div>
+          <input type="range" id="distSliderV" min="0" max="80" step="1" value="22"
+            oninput="document.getElementById('distValV').textContent=this.value"
+            style="width:100%;accent-color:var(--green);height:3px">
+        </div>
+        <div style="background:#0c160c;border:1px solid var(--border);padding:1rem;border-radius:4px">
+          <div style="font-size:10px;letter-spacing:.15em;color:var(--green3);margin-bottom:.75rem">HP CUTOFF <span id="hpVal" style="color:var(--green)">300 Hz</span></div>
+          <input type="range" id="hpSlider" min="200" max="600" step="10" value="300"
+            oninput="document.getElementById('hpVal').textContent=this.value+' Hz'"
+            style="width:100%;accent-color:var(--green);height:3px">
+        </div>
+        <!-- Log -->
+        <div id="vLog" style="background:#050d05;border:1px solid var(--border);border-radius:4px;padding:10px;max-height:80px;overflow-y:auto;font-size:10px;letter-spacing:.06em;color:var(--green3);line-height:1.8">
+          <div>[SYSTEM] VHF voice module ready.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TUẤN ANH · CHỦ TỊCH · 2025</div>
+  <div class="footer-links">
+    <a href="#">NOTAM</a>
+    <a href="#">AIP VN</a>
+    <a href="#">METAR</a>
+    <a href="#">ATIS</a>
+  </div>
+  <div class="footer-copy">TUẤN ANH — CHỦ TỊCH VIETNAM AIR TRAFFIC MANAGEMENT CORP</div>
+</footer>
+
+<script>
+function setFreq(el, freq, name) {
+  document.querySelectorAll('.freq-slot').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelector('.freq-main').innerHTML = freq.replace('.','<span style="color:var(--green3)">.</span>') + '<span class="freq-unit">MHz</span>';
+  document.querySelector('.freq-label2').textContent = name + ' · ACTIVE';
+}
+
+// Animate aircraft counter
+let count = 0;
+const target = 47;
+const timer = setInterval(() => {
+  count += 1;
+  document.getElementById('ctr1').textContent = count.toString().padStart(2,'0');
+  if (count >= target) clearInterval(timer);
+}, 40);
+
+// Live clock
+setInterval(() => {
+  const now = new Date();
+  const utc7 = new Date(now.getTime() + 7*3600000);
+  const h = String(utc7.getUTCHours()).padStart(2,'0');
+  const m = String(utc7.getUTCMinutes()).padStart(2,'0');
+  const s = String(utc7.getUTCSeconds()).padStart(2,'0');
+  document.querySelector('.section-tag') && (document.querySelector('.section-tag').textContent = `UPDATED ${h}:${m}:${s} UTC+7`);
+}, 1000);
+
+// ── PRESETS ──
+const presets = [
+  "Vietnam Airlines 531, cleared to Ho Chi Minh City via BITOD departure. Climb and maintain flight level 280. Squawk 2341.",
+  "Vietnam Airlines 531, Hanoi Approach, radar contact. Descend to 2500, QNH 1011. Expect ILS runway one one left. Report established.",
+  "VietJet 832, radar contact. Climb and maintain flight level 240. Proceed direct ABTAN after departure.",
+  "All stations, Mayday Mayday Mayday. Vietnam Airlines 201 declaring emergency. Engine failure. Request immediate return to Noi Bai."
+];
+function usePreset(i){ document.getElementById('voiceMsg').value = presets[i]; }
+
+// ── LOAD BROWSER VOICES ──
+function loadVoices(){
+  const sel = document.getElementById('vVoice');
+  const voices = speechSynthesis.getVoices();
+  if(!voices.length) return;
+  sel.innerHTML = '';
+  // prioritize English male voices for ATC feel
+  const sorted = [...voices].sort((a,b)=>{
+    const aEn = a.lang.startsWith('en') ? 0 : 1;
+    const bEn = b.lang.startsWith('en') ? 0 : 1;
+    return aEn - bEn;
+  });
+  sorted.forEach((v,i)=>{
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = v.name + ' (' + v.lang + ')';
+    if(v.lang.startsWith('en') && !sel.querySelector('[selected]')) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  vlog('Đã tải ' + voices.length + ' giọng. Chọn giọng English để chuẩn ATC nhất.', 'ok');
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+// iOS thường không fire onvoiceschanged — retry sau vài ms
+setTimeout(loadVoices, 200);
+setTimeout(loadVoices, 800);
+
+// ── VHF NOISE ENGINE (squelch effect) ──
+let audioCtx2 = null, animF2 = null, isPlay2 = false;
+
+function vlog(msg, cls=''){
+  const el = document.getElementById('vLog');
+  const d = document.createElement('div');
+  d.style.color = cls==='err' ? 'var(--red)' : cls==='ok' ? 'var(--green)' : 'var(--green3)';
+  d.textContent = '[' + new Date().toTimeString().slice(0,8) + '] ' + msg;
+  el.appendChild(d); el.scrollTop = el.scrollHeight;
+  if(el.children.length > 20) el.removeChild(el.firstChild);
+}
+
+function playSquelch(duration, gainVal, callback){
+  try {
+    if(!audioCtx2 || audioCtx2.state === 'closed') audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx2.state === 'suspended') audioCtx2.resume();
+    const sr = audioCtx2.sampleRate;
+    const buf = audioCtx2.createBuffer(1, sr * duration, sr);
+    const data = buf.getChannelData(0);
+    for(let i=0; i<data.length; i++) data[i] = Math.random()*2-1;
+    const src = audioCtx2.createBufferSource();
+    src.buffer = buf;
+    const bp = audioCtx2.createBiquadFilter();
+    bp.type = 'bandpass'; bp.frequency.value = 1100; bp.Q.value = 0.7;
+    const lp = audioCtx2.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = 3000;
+    const g = audioCtx2.createGain();
+    g.gain.value = gainVal;
+    const comp = audioCtx2.createDynamicsCompressor();
+    comp.ratio.value = 12;
+    src.connect(bp); bp.connect(lp); lp.connect(g); g.connect(comp); comp.connect(audioCtx2.destination);
+    src.start(); src.stop(audioCtx2.currentTime + duration);
+    if(callback) src.onended = callback;
+  } catch(e) { if(callback) callback(); }
+}
+
+function drawIdleWave(){
+  const cv = document.getElementById('vWave'); if(!cv) return;
+  const ctx = cv.getContext('2d'), W=cv.width, H=cv.height;
+  ctx.fillStyle='#050d05'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#0a2a0a'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,H/2); ctx.lineTo(W,H/2); ctx.stroke();
+}
+
+function animateTxWave(){
+  const cv = document.getElementById('vWave'); if(!cv) return;
+  const ctx = cv.getContext('2d'), W=cv.width, H=cv.height;
+  let t=0;
+  function f(){
+    if(!isPlay2){ drawIdleWave(); return; }
+    animF2 = requestAnimationFrame(f);
+    ctx.fillStyle='#050d05'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='var(--green)'; ctx.lineWidth=1.5; ctx.beginPath();
+    for(let x=0; x<W; x++){
+      const y = H/2 + Math.sin(x*0.04+t)*12 + Math.sin(x*0.09+t*1.3)*6 + (Math.random()-0.5)*4;
+      x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.stroke(); t += 0.12;
+  }
+  f();
+}
+
+// Detect iOS Safari
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+function speak(){
+  if(isPlay2){
+    speechSynthesis.cancel();
+    isPlay2 = false;
+    const btn = document.getElementById('pttBtn');
+    btn.textContent = '▶ TRANSMIT (PTT)'; btn.style.background = 'transparent';
+    document.getElementById('voiceStatus').textContent = 'STANDBY';
+    if(animF2){ cancelAnimationFrame(animF2); animF2=null; }
+    drawIdleWave();
+    return;
+  }
+  const msg = document.getElementById('voiceMsg').value.trim();
+  if(!msg){ vlog('ERROR: Chưa nhập nội dung phát sóng.','err'); return; }
+
+  const voices = speechSynthesis.getVoices();
+  const selIdx = parseInt(document.getElementById('vVoice').value);
+  const chosenVoice = voices[selIdx] || null;
+  const sqGain = parseFloat(document.getElementById('sqSlider').value);
+  const btn = document.getElementById('pttBtn');
+
+  // iOS: phải khởi tạo & resume AudioContext ngay trong user gesture
+  if(!audioCtx2 || audioCtx2.state === 'closed') audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx2.state === 'suspended') audioCtx2.resume();
+
+  isPlay2 = true;
+  btn.textContent = '■ DỪNG'; btn.style.background = 'rgba(0,255,136,.07)';
+  document.getElementById('voiceStatus').textContent = '● TX ACTIVE';
+  vlog('PTT keyed → "' + msg.slice(0,50) + (msg.length>50?'...':'') + '"');
+  animateTxWave();
+
+  const utt = new SpeechSynthesisUtterance(msg);
+  if(chosenVoice) utt.voice = chosenVoice;
+  utt.rate = 0.92;
+  utt.pitch = 0.85;
+  utt.volume = 1;
+
+  utt.onstart = () => {
+    vlog('▶ BROADCASTING — ' + (chosenVoice ? chosenVoice.name : 'default'), 'ok');
+    // Phát squelch mở song song (không chặn speak trên iOS)
+    playSquelch(0.12, sqGain, null);
+  };
+
+  utt.onend = () => {
+    playSquelch(0.12, sqGain, () => {
+      isPlay2 = false;
+      btn.textContent = '▶ TRANSMIT (PTT)'; btn.style.background = 'transparent';
+      document.getElementById('voiceStatus').textContent = 'STANDBY';
+      if(animF2){ cancelAnimationFrame(animF2); animF2=null; }
+      drawIdleWave();
+      vlog('TX complete. Standing by.');
+    });
+  };
+
+  utt.onerror = (e) => {
+    isPlay2 = false;
+    btn.textContent = '▶ TRANSMIT (PTT)'; btn.style.background = 'transparent';
+    document.getElementById('voiceStatus').textContent = 'ERROR';
+    if(animF2){ cancelAnimationFrame(animF2); animF2=null; }
+    drawIdleWave();
+    vlog('ERROR: ' + e.error, 'err');
+  };
+
+  if(isIOS) {
+    // iOS: speak() phải gọi đồng bộ trong user gesture, KHÔNG được nằm trong callback
+    speechSynthesis.speak(utt);
+  } else {
+    // Desktop/Android: phát squelch mở trước, rồi mới speak
+    playSquelch(0.12, sqGain, () => speechSynthesis.speak(utt));
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(e.code==='Space' && document.activeElement.tagName!=='TEXTAREA' && document.activeElement.tagName!=='INPUT'){
+    e.preventDefault(); speak();
+  }
+});
+drawIdleWave();
+
+
+const msgs = [
+  ['VVNB APP','Vietnam Airlines 531, continue approach, winds 080 at 6, runway 11L cleared to land.','atc'],
+  ['VN531','Cleared to land runway 11L, Vietnam 531.',''],
+  ['VJ120','Hanoi Control, VietJet 120, request direct ABAGO.',''],
+  ['VVNB CTR','VietJet 120, approved direct ABAGO, report passing FL280.','atc'],
+  ['BL240','Ho Chi Minh Departure, Bamboo 240, level FL240.',''],
+  ['VVTS DEP','Bamboo 240, climb flight level 350, turn right heading 220.','atc'],
+];
+let mi = 0;
+setInterval(() => {
+  const feed = document.getElementById('commFeed');
+  const now = new Date();
+  const utc7 = new Date(now.getTime() + 7*3600000);
+  const time = [utc7.getUTCHours(),utc7.getUTCMinutes(),utc7.getUTCSeconds()].map(n=>String(n).padStart(2,'0')).join(':');
+  const [call, msg, cls] = msgs[mi++ % msgs.length];
+  const line = document.createElement('div');
+  line.className = 'comm-line';
+  line.innerHTML = `<span class="comm-time">${time}</span><span class="comm-call">${call}</span><span class="comm-msg ${cls}">${msg}</span>`;
+  feed.insertBefore(line, feed.firstChild);
+  if (feed.children.length > 10) feed.removeChild(feed.lastChild);
+}, 5000);
+</script>
+</body>
+</html>
